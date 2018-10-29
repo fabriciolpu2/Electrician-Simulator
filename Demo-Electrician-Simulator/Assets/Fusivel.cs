@@ -6,10 +6,12 @@ public class Fusivel : MonoBehaviour {
 
     public GameObject mao;
     public GameObject eixoGancho;
+    public GameObject gancho;
     //public Quaternion rotacaoCamera;
     //public GameObject gancho;
     // Use this for initialization
     public bool fixarFusivelNoGancho = true;
+    public bool baixarGancho = false;
    
 
 
@@ -31,7 +33,6 @@ public class Fusivel : MonoBehaviour {
         {
             DesfixarFusivelGancho();
         }
-        
     }
 
     void FixarFusivelGancho()
@@ -43,5 +44,18 @@ public class Fusivel : MonoBehaviour {
     {
         
         Debug.Log("Desfixando");
+
+        if(baixarGancho == true)
+        {
+            PreparaGanchoPegarFusivel();
+        }
+        //PreparaGanchoPegarFusivel();
+    }
+
+    void PreparaGanchoPegarFusivel()
+    {
+        Debug.Log("recua Ganhco");
+        gancho.transform.position = new Vector3(gancho.transform.position.x, gancho.transform.position.y, gancho.transform.position.z -0.25f);
+        baixarGancho = false;
     }
 }
