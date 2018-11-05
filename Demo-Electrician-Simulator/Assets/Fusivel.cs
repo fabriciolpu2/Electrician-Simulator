@@ -12,6 +12,9 @@ public class Fusivel : MonoBehaviour {
     // Use this for initialization
     public bool fixarFusivelNoGancho = true;
     public bool baixarGancho = false;
+    public bool pegarGanhoBase = false;
+    public bool fixarGanchoFusivel = false;
+    public bool levantarGancho = false;
    
 
 
@@ -33,6 +36,9 @@ public class Fusivel : MonoBehaviour {
         {
             DesfixarFusivelGancho();
         }
+
+        //if (levantarGancho == true)
+            //LevantarGancho();        
     }
 
     void FixarFusivelGancho()
@@ -55,7 +61,21 @@ public class Fusivel : MonoBehaviour {
     void PreparaGanchoPegarFusivel()
     {
         Debug.Log("recua Ganhco");
-        gancho.transform.position = new Vector3(gancho.transform.position.x, gancho.transform.position.y, gancho.transform.position.z -0.25f);
+
+        mao.transform.position = new Vector3(mao.transform.position.x, mao.transform.position.y, mao.transform.position.z - 0.09f);
+        Debug.Log(mao.transform.position);
+        pegarGanhoBase = true;
         baixarGancho = false;
+    }
+
+    public void LevantarGancho()
+    {        
+        Debug.Log("Levantando Fusivel");
+        mao.transform.position = new Vector3(mao.transform.position.x, mao.transform.position.y, mao.transform.position.z + 0.09f);
+        levantarGancho = false;
+    }
+    public void FixarGanchoFusivel()
+    {
+        eixoGancho.transform.position = transform.position;
     }
 }

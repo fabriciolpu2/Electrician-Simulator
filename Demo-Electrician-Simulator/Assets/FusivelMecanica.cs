@@ -10,6 +10,10 @@ public class FusivelMecanica : MonoBehaviour {
     public Rigidbody rb;
     public GameObject ponto_Encaixe_Trava;
     public Transform Posicao_Encaixe;
+    public GameObject sensorBaseFusivel;
+    public GameObject jointEncaixaFusivel;
+    public GameObject pontaGanho;
+
 
     // Use this for initialization
     void Start () {        
@@ -28,7 +32,7 @@ public class FusivelMecanica : MonoBehaviour {
         if (other.tag == "SensorFusivel")
         {
             fusivel.fixarFusivelNoGancho = false;
-            Debug.Log("Chegou aqui no sensor");
+            //Debug.Log("Chegou aqui no sensor");
             //hinge.useSpring = false;
             hinge.connectedBody = null;
             if (hinge.connectedBody == null)
@@ -43,6 +47,36 @@ public class FusivelMecanica : MonoBehaviour {
                 hinge.connectedBody = suporteFusivelBasePoste;
                 rb.useGravity = true;
                 fusivel.baixarGancho = true;
+            }
+            
+        }
+
+        //Debug.Log(other.name);
+        if (other.tag == "GanhoPegaFusivel")
+        {
+            if (fusivel.pegarGanhoBase == true)
+            {
+                //SuperPivot.API.Space.Local;
+                //SuperPivot.API.SetPivot(transform, new Vector3(3,3,3),SuperPivot.API.Space.Local);
+                jointEncaixaFusivel.GetComponent<HingeJoint>().connectedBody = ponto_Encaixe_Trava.GetComponent<Rigidbody>();
+                jointEncaixaFusivel.GetComponent<Rigidbody>().isKinematic = false;
+                jointEncaixaFusivel.GetComponent<Rigidbody>().useGravity = true;                
+
+                JointLimits limits = hinge.limits;
+                limits.min = 4f;
+                limits.max = 180f;
+
+                hinge.limits = limits;
+                hinge.useLimits = true;
+
+
+                pontaGanho.GetComponent<HingeJoint>().connectedBody = jointEncaixaFusivel.GetComponent<Rigidbody>();
+
+                //JointLimits.Equals
+                //fusivel.LevantarFusivel();
+                fusivel.levantarGancho = true;
+                fusivel.fixarGanchoFusivel = true;
+                Debug.Log("Aqui no Sensor");
             }
             
         }
