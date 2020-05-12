@@ -2214,7 +2214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mao: {fileID: 1995555461}
   eixoGancho: {fileID: 1579688137}
-  gancho: {fileID: 937954403}
+  gancho: {fileID: 1579688137}
   fixarFusivelNoGancho: 1
   baixarGancho: 0
   pegarGanhoBase: 0

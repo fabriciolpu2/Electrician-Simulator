@@ -6,29 +6,16 @@ public class Fusivel : MonoBehaviour {
 
     public GameObject mao;
     public GameObject eixoGancho;
-    public GameObject gancho;
-    //public Quaternion rotacaoCamera;
-    //public GameObject gancho;
-    // Use this for initialization
+    public GameObject gancho;   
     public bool fixarFusivelNoGancho = true;
     public bool baixarGancho = false;
     public bool pegarGanhoBase = false;
     public bool fixarGanchoFusivel = false;
     public bool levantarGancho = false;
-   
-
-
-    void Start () {
-        //hinge = GetComponent<HingeJoint>();
-        
-    }
+       
 	
 	// Update is called once per frame
-	void Update () {
-        //transform.rotation = mao.transform.rotation;        
-        //transform.localRotation = mao.transform.rotation;
-        //transform.Rotate(0, eixoGancho.transform.rotation.y, mao.transform.rotation.z);
-        //transform.SetParent(eixoGancho.transform);
+	void Update () {        
         if(fixarFusivelNoGancho == true)
         {
             FixarFusivelGancho();
@@ -48,34 +35,31 @@ public class Fusivel : MonoBehaviour {
 
     void DesfixarFusivelGancho()
     {
-        
-        Debug.Log("Desfixando");
-
         if(baixarGancho == true)
         {
             PreparaGanchoPegarFusivel();
         }
-        //PreparaGanchoPegarFusivel();
     }
 
     void PreparaGanchoPegarFusivel()
     {
-        Debug.Log("recua Ganhco");
-
-        mao.transform.position = new Vector3(mao.transform.position.x, mao.transform.position.y, mao.transform.position.z - 0.09f);
-        Debug.Log(mao.transform.position);
+        mao.transform.position = new Vector3(mao.transform.position.x, mao.transform.position.y, mao.transform.position.z - 0.09f);        
         pegarGanhoBase = true;
         baixarGancho = false;
     }
 
     public void LevantarGancho()
-    {        
-        Debug.Log("Levantando Fusivel");
+    {                
         mao.transform.position = new Vector3(mao.transform.position.x, mao.transform.position.y, mao.transform.position.z + 0.09f);
         levantarGancho = false;
     }
     public void FixarGanchoFusivel()
     {
         eixoGancho.transform.position = transform.position;
+    }
+
+    public void GanchoParenteFusivel()
+    {
+        gancho.transform.SetParent(this.transform);
     }
 }

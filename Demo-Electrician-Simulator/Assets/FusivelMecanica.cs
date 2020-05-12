@@ -21,27 +21,18 @@ public class FusivelMecanica : MonoBehaviour {
         hinge = GetComponent<HingeJoint>();
         rb = GetComponent<Rigidbody>();        
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "SensorFusivel")
         {
-            fusivel.fixarFusivelNoGancho = false;
-            //Debug.Log("Chegou aqui no sensor");
-            //hinge.useSpring = false;
+            fusivel.fixarFusivelNoGancho = false;         
             hinge.connectedBody = null;
             if (hinge.connectedBody == null)
             {
                 //transform.SetParent(ponto_Encaixe_Trava.transform);
                 ponto_Encaixe_Trava.transform.position = Posicao_Encaixe.position;
-                transform.rotation.Set(0, 0, 0, 0);
-                //transform.SetPositionAndRotation(new Vector3(Posicao_Encaixe.position.x, Posicao_Encaixe.position.y, Posicao_Encaixe.position.z),new Quaternion(0,,90,0) );
-                //fusivel.gameObject.transform.SetParent
+                transform.rotation.Set(0, 0, 0, 0);                
                 Debug.Log("Aqui no nulo");                
                 hinge.anchor = new Vector3(0,0,0);
                 hinge.connectedBody = suporteFusivelBasePoste;
@@ -50,14 +41,10 @@ public class FusivelMecanica : MonoBehaviour {
             }
             
         }
-
-        //Debug.Log(other.name);
         if (other.tag == "GanhoPegaFusivel")
         {
             if (fusivel.pegarGanhoBase == true)
-            {
-                //SuperPivot.API.Space.Local;
-                //SuperPivot.API.SetPivot(transform, new Vector3(3,3,3),SuperPivot.API.Space.Local);
+            {                
                 jointEncaixaFusivel.GetComponent<HingeJoint>().connectedBody = ponto_Encaixe_Trava.GetComponent<Rigidbody>();
                 jointEncaixaFusivel.GetComponent<Rigidbody>().isKinematic = false;
                 jointEncaixaFusivel.GetComponent<Rigidbody>().useGravity = true;                
@@ -71,12 +58,11 @@ public class FusivelMecanica : MonoBehaviour {
 
 
                 pontaGanho.GetComponent<HingeJoint>().connectedBody = jointEncaixaFusivel.GetComponent<Rigidbody>();
-
-                //JointLimits.Equals
-                //fusivel.LevantarFusivel();
+                
                 fusivel.levantarGancho = true;
                 fusivel.fixarGanchoFusivel = true;
                 Debug.Log("Aqui no Sensor");
+                fusivel.GanchoParenteFusivel();
             }
             
         }
